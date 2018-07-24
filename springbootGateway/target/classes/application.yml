@@ -1,0 +1,48 @@
+spring:
+  aop:
+    proxyTargetClass: true
+  application:
+    name: springboot-gateway
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test??useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+# Define the port where the API gateway server would be running
+server:
+  port: 8765
+  #ssl:
+     #key-store: classpath:keystore.jks
+     #key-store-password: 123456
+     #keyStoreType: JKS
+     #key-alias: certificatekey
+
+eureka:
+  instance:
+      hostname: localhost
+      port: 8761
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.32.140:8761/eureka/    # 指定注册中心的地址
+
+zuul:
+  routes:
+    springboot-demo: /demo/**
+    springboot-auth: /auth/**
+      #sensitiveHeaders:
+      #path: /uaa/**
+      #stripPrefix: false
+  add-proxy-headers: true
+
+security:
+  basic:
+    enabled: false
+#logging:
+  #level.org.springframework.security: DEBUG
+  #file: logs/${spring.application.name}.log
+  
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds : 60000
+ribbon.ConnectTimeout: 20000
+ribbon.ReadTimeout: 35000
+
+
