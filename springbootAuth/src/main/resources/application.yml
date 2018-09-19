@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+
+spring:
+  application:
+     name: springboot-auth
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test??useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    host: 127.0.0.1
+    database: 0
+  #  password: grape
+  jpa:
+     hibernate:
+         ddl-auto: update
+         naming:
+           physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+     show-sql: true
+logging:
+  level:
+    jdbc: error
+    jdbc.sqltiming: info
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.32.140:8761/eureka/    # 指定注册中心的地址
+
